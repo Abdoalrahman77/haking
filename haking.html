@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <title>اختراق وهمي</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: black;
+            color: green;
+            font-family: "Courier New", Courier, monospace;
+            padding: 20px;
+            text-align: left;
+        }
+        #console {
+            white-space: pre-wrap;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+        #cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: green;
+            animation: blink 0.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>HACKING TO SHUAEB PHONE...<br>تهكير جوال شعيب</h1>
+    <div id="console"></div>
+    <div id="cursor"></div>
+
+    <script>
+        const messages = [
+            "for number  773146710<br>Establishing secure connection... <br>إنشاء اتصال آمن<br> Locating GPS coordinates...<br>تحديد الموقع الخاص بالضحية<br>",
+          "Accessing camera and microphone...<br>الوصول للكاميرا والميكروفون الخاص بالضحية",
+            "Accessing device:  <br>جاري الوصول للجهاز: شعيب... </br>",
+            "Retrieving WhatsApp chats... <br>استرجاع محادثات الواتس اب</br>",
+            "Bypassing security protocols... <br>تجاوز بروتوكولات الأمان</br>",
+            "Access granted! Downloading sensitive data... <br>تم منح الوصول! تنزيل البيانات الحساسة</br>",
+            "Warning: Encryption bypass detected! <br>تحذير: تم اكتشاف تجاوز التشفير!</br>",
+            "Uploading malware to device... <br>تحميل البرامج الضارة إلى الجهاز</br>",
+            "Complete: شعيب's device has been compromised! <br>تم اختراق جهاز شعيب كاملا!</br>"
+        ];
+
+        const consoleDiv = document.getElementById("console");
+
+        let messageIndex = 0; // الفهرس الحالي للرسالة
+        let charIndex = 0; // الفهرس الحالي للحرف
+        let currentMessage = ""; // الرسالة التي يتم طباعتها حاليًا
+
+        function typeCharacter() {
+            if (messageIndex < messages.length) {
+                if (charIndex === 0) {
+                    // ابدأ الرسالة الجديدة
+                    currentMessage = messages[messageIndex];
+                }
+
+                if (charIndex < currentMessage.length) {
+                    // أضف الحرف الحالي إلى النص
+                    const char = currentMessage[charIndex];
+                    if (char === "<") {
+                        // تفسير العلامة HTML (مثل <br>)
+                        const endTagIndex = currentMessage.indexOf(">", charIndex);
+                        if (endTagIndex !== -1) {
+                            const htmlTag = currentMessage.substring(charIndex, endTagIndex + 1);
+                            consoleDiv.innerHTML += htmlTag;
+                            charIndex = endTagIndex + 1; // تخطي العلامة
+                        }
+                    } else {
+                        consoleDiv.innerHTML += char;
+                        charIndex++;
+                    }
+
+                    setTimeout(typeCharacter, 30); // مدة الطباعة لكل حرف
+                } else {
+                    // انتهت الرسالة الحالية
+                    charIndex = 0;
+                    messageIndex++;
+                    setTimeout(typeCharacter, 1000); // مدة الانتظار بين الرسائل
+                }
+            } else {
+                consoleDiv.innerHTML += "\n> Process completed successfully! تمت العملية بنجاح!";
+            }
+        }
+
+        typeCharacter();
+    </script>
+</body>
+</html>
